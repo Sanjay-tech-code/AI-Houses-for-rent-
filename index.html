@@ -1,273 +1,244 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Houses for Rent - Odisha</title>
+  <title>AI Houses for Rent – Odisha</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
+    /* General styles */
+    * {
       margin: 0;
       padding: 0;
-      background: #f9f9f9;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
     }
-    h2 {
+
+    body {
+      background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    header {
+      background-color: #ff6600;
+      color: #fff;
       text-align: center;
-      color: #222;
-      margin-top: 30px;
+      padding: 25px 10px;
     }
+
+    header h1 {
+      font-size: 1.8rem;
+      margin-bottom: 5px;
+    }
+
+    header p {
+      font-size: 1rem;
+    }
+
+    /* Navigation */
+    nav {
+      background-color: #222;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 12px 0;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #ff6600;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      text-align: center;
+      color: #fff;
+    }
+
+    .hero img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      filter: brightness(60%);
+    }
+
+    .hero-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+    }
+
+    .hero-text h2 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    .hero-text p {
+      font-size: 1rem;
+    }
+
+    /* Services Section */
+    section.services {
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    section.services h2 {
+      font-size: 1.6rem;
+      margin-bottom: 30px;
+    }
+
     .service-container {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      padding: 20px;
       gap: 20px;
     }
+
     .service-card {
       background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      text-align: center;
-      width: 250px;
+      width: 280px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       padding: 20px;
-      transition: transform 0.3s;
+      transition: 0.3s;
     }
+
     .service-card:hover {
       transform: translateY(-5px);
     }
-    .service-card img {
-      width: 80px;
-      height: 80px;
-    }
-    .service-card h3 {
-      color: #ff6600;
-      margin: 10px 0 5px;
-    }
-    .service-card p {
-      color: #555;
-      font-size: 14px;
-    }
-  </style>
-</head>
-<body>
-  <section id="services" class="services">
-    <h2>Our Additional Services</h2>
-    <div class="service-container">
-      <div class="service-card"><img src="https://cdn-icons-png.flaticon.com/512/1046/1046857.png"><h3>Home Cleaning</h3><p>Professional house cleaning and sanitization.</p></div>
-      <div class="service-card"><img src="https://cdn-icons-png.flaticon.com/512/2965/2965567.png"><h3>Plumber</h3><p>Experienced plumbers for tap, pipe, and bathroom repair.</p></div>
-      <div class="service-card"><img src="https://cdn-icons-png.flaticon.com/512/1802/1802977.png"><h3>Electrician</h3><p>Skilled electricians for wiring, lights, and appliances.</p></div>
-      <div class="service-card"><img src="https://cdn-icons-png.flaticon.com/512/679/679922.png"><h3>Painters</h3><p>Interior and exterior painting by professionals.</p></div>
-      <div class="service-card"><img src="https://cdn-icons-png.flaticon.com/512/1055/1055646.png"><h3>Carpenter</h3><p>Woodwork, furniture repair and fitting.</p></div>
-      <div class="service-card"><img src="https://cdn-icons-png.flaticon.com/512/3203/3203071.png"><h3>Packers & Movers</h3><p>Quick and safe home shifting and transport service.</p></div>
-      <div class="service-card"><img src="https://cdn-icons-png.flaticon.com/512/3474/3474360.png"><h3>AC Repair</h3><p>Air conditioner installation and maintenance service.</p></div>
-      <div class="service-card"><img src="https://cdn-icons-png.flaticon.com/512/3774/3774299.png"><h3>Gardening</h3><p>Home garden setup, care, and maintenance.</p></div>
-      <div class="service-card"><img src="https://cdn-icons-png.flaticon.com/512/3050/3050525.png"><h3>Security Services</h3><p>Trained security guards for apartments and offices.</p></div>
-    </div>
-  </section>
 
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Houses for Rent - Odisha</title>
-  <style>
-    body {font-family
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f7f8fa;
-      color: #333;
+    .service-card img {
+      width: 70px;
+      height: 70px;
+      margin-bottom: 15px;
     }
-    header {
-      background: #ff6600;
-      color: white;
+
+    .service-card h3 {
+      margin-bottom: 10px;
+      color: #ff6600;
+    }
+
+    .service-card p {
+      font-size: 0.95rem;
+    }
+
+    /* Contact */
+    .contact {
       text-align: center;
-      padding: 20px;
+      padding: 50px 20px;
+      background-color: #f1f1f1;
     }
-    nav {
-      background: #222;
-      padding: 10px;
-      text-align: center;
+
+    .contact h2 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
     }
-    nav a {
-      color: white;
+
+    .contact p {
+      margin-bottom: 10px;
+    }
+
+    .contact a {
+      color: #ff6600;
       text-decoration: none;
-      margin: 0 15px;
     }
-    nav a:hover {
-      text-decoration: underline;
-    }
-    .hero {
-      background: url('https://images.unsplash.com/photo-1560185127-6ed189bf02f4?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
-      height: 300px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 28px;
-      text-shadow: 1px 1px 3px #000;
-    }
-    section {
-      padding: 30px;
-      text-align: center;
-    }
-    .services {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-    }
-    .service-card {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      padding: 20px;
-      width: 250px;
-    }
+
     footer {
-      background: #222;
-      color: white;
       text-align: center;
+      background-color: #222;
+      color: #ccc;
       padding: 15px;
-      margin-top: 20px;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.4rem;
+      }
+      .hero-text h2 {
+        font-size: 1.4rem;
+      }
+      .service-card {
+        width: 90%;
+      }
     }
   </style>
 </head>
 <body>
+
+  <!-- Header -->
   <header>
     <h1>AI Houses for Rent</h1>
     <p>Find and rent houses in Odisha easily with AI</p>
   </header>
 
+  <!-- Navigation -->
   <nav>
     <a href="#home">Home</a>
     <a href="#services">Services</a>
     <a href="#contact">Contact</a>
   </nav>
 
-  <div class="hero">
-    <div>Smart, Easy & AI-Powered House Renting</div>
-  </div>
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="House">
+    <div class="hero-text">
+      <h2>Smart, Easy & AI-Powered House Renting</h2>
+      <p>Discover the best homes and services in Odisha with one tap.</p>
+    </div>
+  </section>
 
-  <section id="services">
+  <!-- Services Section -->
+  <section class="services" id="services">
     <h2>Our Services</h2>
-    <div class="services">
+    <div class="service-container">
       <div class="service-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" alt="Listing">
         <h3>House Listing</h3>
-        <p>List your property easily and get tenants fast.</p>
+        <p>List your property and find tenants quickly with AI-based recommendations.</p>
       </div>
       <div class="service-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/3039/3039403.png" alt="AI">
         <h3>AI Recommendations</h3>
-        <p>Our AI suggests the best houses based on your needs.</p>
+        <p>Get personalized suggestions based on your needs and location.</p>
       </div>
       <div class="service-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/1880/1880992.png" alt="Agent">
         <h3>Agent Assistance</h3>
-        <p>Connect with verified agents for hassle-free renting.</p>
+        <p>Connect with verified local agents for smooth and safe deals.</p>
+      </div>
+      <div class="service-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/2707/2707278.png" alt="Maintenance">
+        <h3>Home Maintenance</h3>
+        <p>Plumbing, electrical, and painting services for your rental home.</p>
       </div>
     </div>
   </section>
 
-  <section id="contact">
+  <!-- Contact Section -->
+  <section class="contact" id="contact">
     <h2>Contact Us</h2>
-    <p>📍 Bhubaneswar, Odisha</p>
-    <p>📞 +91 7847835758</p>
-    <p>✉️ info@aihousesforrent.in</p>
+    <p><strong>📍 Location:</strong> Bhubaneswar, Odisha</p>
+    <p><strong>📞 Phone:</strong> +91 78478 35758</p>
+    <p><strong>📧 Email:</strong> <a href="mailto:info@aihousesforrent.in">info@aihousesforrent.in</a></p>
   </section>
-<section id="services" class="services">
-  <h2>Our Additional Services</h2>
-  <div class="service-container">
-    <div class="service-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/1046/1046857.png" alt="Cleaning Service" />
-      <h3>Home Cleaning</h3>
-      <p>Professional house cleaning and sanitization services for tenants and owners.</p>
-    </div>
 
-    <div class="service-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/2974/2974635.png" alt="Plumber Service" />
-      <h3>Plumber</h3>
-      <p>Quick plumbing solutions for leaks, installations, and repairs.</p>
-    </div>
-
-    <div class="service-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/1046/1046852.png" alt="Electrician Service" />
-      <h3>Electrician</h3>
-      <p>Trusted electricians for wiring, lighting, and electrical maintenance.</p>
-    </div>
-  </div>
-</section>
+  <!-- Footer -->
   <footer>
     <p>© 2025 AI Houses for Rent | Made with ❤️ in Odisha</p>
   </footer>
+
 </body>
-</html><div class="service-card">
-  <img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" />
-  <h3>Home Cleaning</h3>
-  <p>Professional house cleaning and sanitization.</p>
-</div><div class="service-card">
-  <img src="https://cdn-icons-png.flaticon.com/512/2933/2933700.png" />
-  <h3>Plumber</h3>
-  <p>Experienced plumbers available for all kinds of pipe, tap, and bathroom repair services.</p>
-</div>
-
-<div class="service-card">
-  <img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png" />
-  <h3>Electrician</h3>
-  <p>Trusted electricians for wiring, lighting, and appliance repair work.</p>
-</div>
-<section id="services" class="services">
-  <h2>Our Additional Services</h2>
-  <div class="service-container">
-    <div class="service-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/1046/1046857.png" alt="Cleaning Service" />
-      <h3>Home Cleaning</h3>
-      <p>Professional house cleaning and sanitization services for tenants and owners.</p>
-    </div>
-
-    <div class="service-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/2974/2974635.png" alt="Plumber Service" />
-      <h3>Plumber</h3>
-      <p>Quick plumbing solutions for leaks, installations, and repairs.</p>
-    </div>
-
-    <div class="service-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/1046/1046852.png" alt="Electrician Service" />
-      <h3>Electrician</h3>
-      <p>Trusted electricians for wiring, lighting, and electrical maintenance.</p>
-    </div>
-  </div>
-</section>
-.services {
-  padding: 50px 20px;
-  text-align: center;
-  background-color: #f7f7f7;
-}
-
-.service-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
-
-.service-card {
-  background: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  width: 280px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  transition: 0.3s;
-}
-
-.service-card:hover {
-  transform: translateY(-5px);
-}
-
-.service-card img {
-  width: 80px;
-  height: 80px;
-  margin-bottom: 15px;
-}
-
-.service-card h3 {
-  color: #333;
-  margin-bottom: 10px;
-}</body>
 </html>
