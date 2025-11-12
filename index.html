@@ -1,3 +1,205 @@
+Awesome 😎 let’s upgrade your chatbot into a smart rental assistant that can:
+🏠 Find houses in Odisha by city or budget
+👨‍💼 Help owners list their houses
+📧 Share your contact info
+💬 Give friendly AI-style replies
+
+Here’s your improved full code — just replace your current index.html with this one in GitHub 👇
+
+
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Houses for Rent</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f7f9fc;
+      color: #222;
+    }
+
+    header {
+      background: #0078d7;
+      color: #fff;
+      padding: 1.2rem;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    main {
+      padding: 1.5rem;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    section {
+      margin-bottom: 2rem;
+      background: #fff;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    /* Chatbot Styles */
+    #chatbot-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #0078d7;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      z-index: 1000;
+    }
+
+    #chatbot-container {
+      display: none;
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 320px;
+      height: 420px;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 999;
+    }
+
+    #chatbot-header {
+      background-color: #0078d7;
+      color: white;
+      padding: 0.8rem;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    #chatbot-messages {
+      flex: 1;
+      padding: 0.8rem;
+      overflow-y: auto;
+      font-size: 0.95rem;
+    }
+
+    .message {
+      margin-bottom: 0.8rem;
+    }
+
+    .bot {
+      background-color: #e6f0ff;
+      padding: 0.5rem 0.8rem;
+      border-radius: 10px;
+      width: fit-content;
+      max-width: 80%;
+    }
+
+    .user {
+      background-color: #d1ffd6;
+      padding: 0.5rem 0.8rem;
+      border-radius: 10px;
+      margin-left: auto;
+      width: fit-content;
+      max-width: 80%;
+    }
+
+    #chatbot-input {
+      display: flex;
+      border-top: 1px solid #ccc;
+    }
+
+    #chatbot-input input {
+      flex: 1;
+      border: none;
+      padding: 0.7rem;
+      font-size: 1rem;
+    }
+
+    #chatbot-input button {
+      border: none;
+      background-color: #0078d7;
+      color: white;
+      padding: 0 1rem;
+      cursor: pointer;
+    }
+
+    #chatbot-input input:focus {
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <header>🏠 AI Houses for Rent</header>
+
+  <main>
+    <section>
+      <h2>Welcome to AI Houses for Rent</h2>
+      <p>Find and rent your perfect home in Odisha with the power of AI.</p>
+      <p>Our platform helps you discover, compare, and connect with property owners easily — 100% digital, fast, and simple.</p>
+    </section>
+
+    <section>
+      <h2>Why Choose Us?</h2>
+      <ul>
+        <li>Smart AI house recommendations</li>
+        <li>Verified property listings</li>
+        <li>Free account setup for owners</li>
+        <li>24×7 chatbot support</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Contact Us</h2>
+      <p>Email: <a href="mailto:sanjayyyyy436@gmail.com">sanjayyyyy436@gmail.com</a></p>
+      <p>Location: Odisha, India</p>
+    </section>
+  </main>
+
+  <footer>© 2025 AI Houses for Rent — Made with ❤️ in Odisha</footer>
+
+  <!-- Chatbot Widget -->
+  <button id="chatbot-toggle">💬</button>
+
+  <div id="chatbot-container">
+    <div id="chatbot-header">AI Assistant</div>
+    <div id="chatbot-messages">
+      <div class="message bot">Hello 👋! I’m your AI housing assistant. Are you looking for a house or want to list one?</div>
+    </div>
+    <div id="chatbot-input">
+      <input type="text" id="user-input" placeholder="Type a message..." />
+      <button id="send-btn">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const toggleBtn = document.getElementById('chatbot-toggle');
+    const chatbot = document.getElementById('chatbot-container');
+    const sendBtn = document.getElementById('send-btn');
+    const userInput = document.getElementById('user-input');
+    const messages = document.getElementById('chatbot-messages');
+
+    toggleBtn.addEventListener('click', () => {
+      chatbot.style.display = chatbot.style.display === 'flex' ? 'none' : 'flex';
+    });
    sendBtn.addEventListener('click', sendMessage);
     userInput.addEventListener('keypress', e => {
       if (e.key === 'Enter') sendMessage();
