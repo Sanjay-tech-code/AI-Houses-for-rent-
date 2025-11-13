@@ -13,20 +13,24 @@
 
 /* Chat UI */
     #chatbot-toggle{position:fixed;bottom:20px;right:20px;background:#0078d7;color:#fff;border:none;border-radius:50%;width:60px;height:60px;font-size:24px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.15);z-index:1000}
-    #chatbot-container{display:none;position:fixed;bottom:90px;right:20px;width:360px;height:520px;background:#fff;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.2);display:flex;flex-direction:column;overflow:hidden;z-index:1000}
+    #chatbot-container{display:none;position:fixed;bottom:90px;right:20px;width:380px;height:540px;background:#fff;border-radius:12px;box-shadow:0 6px 22px rgba(0,0,0,.22);display:flex;flex-direction:column;overflow:hidden;z-index:1000}
     #chatbot-header{background:#0078d7;color:#fff;padding:.9rem;font-weight:700;text-align:center}
     #chatbot-body{flex:1;padding:.8rem;overflow-y:auto}
-    .message{margin-bottom:.8rem;max-width:85%;word-wrap:break-word}
+    .message{margin-bottom:.8rem;max-width:92%;word-wrap:break-word}
     .bot{background:#e6f0ff;padding:.6rem .9rem;border-radius:12px}
     .user{background:#d1ffd6;padding:.6rem .9rem;border-radius:12px;margin-left:auto}
+    .listing{background:#fff;border:1px solid #e1e7ff;padding:.6rem;border-radius:10px;margin-top:6px}
+    .listing .title{font-weight:700}
+    .listing small{color:#555}
     #chatbot-input{display:flex;border-top:1px solid #e6e6e6;padding:.6rem}
     #chatbot-input input{flex:1;border:1px solid #ddd;border-radius:8px;padding:.6rem;font-size:1rem}
     #chatbot-input button{margin-left:.5rem;padding:.5rem 1rem;border:none;border-radius:8px;background:#0078d7;color:#fff;cursor:pointer}
     .quick-services{display:flex;gap:.5rem;flex-wrap:wrap;margin:8px 0}
     .svc-btn{background:#f0f7ff;border:1px solid #d6eaff;padding:.4rem .6rem;border-radius:8px;cursor:pointer}
+    .action-btn{background:#0078d7;color:white;border:none;padding:.35rem .6rem;border-radius:6px;cursor:pointer;margin-left:6px}
     .typing{font-style:italic;color:#666}
     @media (max-width:420px){
-      #chatbot-container{right:12px;left:12px;width:auto;height:520px}
+      #chatbot-container{right:12px;left:12px;width:auto;height:540px}
       #chatbot-toggle{right:12px}
     }
   </style>
@@ -38,7 +42,6 @@
     <section>
       <h2>Welcome to AI Houses for Rent</h2>
       <p>Find and rent your perfect home in Odisha with the power of AI.</p>
-      <p>Our platform helps you discover, compare, and connect with property owners easily — 100% digital, fast, and simple.</p>
     </section>
 
     <section>
@@ -66,7 +69,7 @@
   <div id="chatbot-container" role="dialog" aria-label="Chatbot">
     <div id="chatbot-header">AI Assistant — Houses & Services</div>
     <div id="chatbot-body" aria-live="polite">
-      <div class="message bot">Hello 👋! I can help you find houses across Odisha or book services like cleaning, plumber, electrician, painter. Type a city or choose a service. Example: "Find house in Bhubaneswar 8000".</div>
+      <div class="message bot">Hello 👋! I can show sample houses across Odisha and help with services (cleaning, plumber, electrician, painter). Try: "Find house in Bhubaneswar 8000" or click a service button.</div>
       <div class="quick-services" style="margin-top:8px">
         <button class="svc-btn" data-svc="cleaning">Cleaning</button>
         <button class="svc-btn" data-svc="plumber">Plumber</button>
@@ -83,30 +86,56 @@
   </div>
 
 <script>
-  // Cities & simple rent ranges (text-only guidance)
+  // Sample city data & sample listings
   const cities = {
-    "bhubaneswar": {small:"₹8,000", medium:"₹12,000", large:"₹18,000", note:"capital city, prices vary by area"},
-    "cuttack": {small:"₹6,000", medium:"₹10,000", large:"₹15,000", note:"nearby markets & schools"},
-    "berhampur": {small:"₹5,500", medium:"₹9,000", large:"₹14,000", note:"popular in Ganjam district"},
-    "puri": {small:"₹6,000", medium:"₹11,000", large:"₹16,000", note:"tourist area — seasonal rates"},
-    "rourkela": {small:"₹6,500", medium:"₹10,500", large:"₹15,500", note:"industrial city"},
-    "sambalpur": {small:"₹5,500", medium:"₹9,500", large:"₹13,500", note:"western Odisha"},
-    "balasore": {small:"₹5,500", medium:"₹9,000", large:"₹13,000", note:"near the coast"},
-    "bhadrak": {small:"₹5,000", medium:"₹8,000", large:"₹12,000", note:"small city"},
-    "koraput": {small:"₹4,500", medium:"₹7,500", large:"₹11,000", note:"hilly region"},
-    "jagatsinghpur": {small:"₹5,000", medium:"₹8,500", large:"₹12,000", note:"nearby Puri/Coastal"},
-    // add more if needed
+    "bhubaneswar": {
+      listings:[
+        {title:"2BHK near Jaydev Vihar", rent:"₹8,000/month", desc:"Well-ventilated, 2 bathrooms, near market. Contact: sanjayyyyy436@gmail.com"},
+        {title:"3BHK in Khandagiri", rent:"₹14,000/month", desc:"Family-friendly, parking available. Contact: sanjayyyyy436@gmail.com"}
+      ]
+    },
+    "cuttack": {
+      listings:[
+        {title:"1BHK near Link Road", rent:"₹6,000/month", desc:"Compact 1BHK, good for singles. Contact: sanjayyyyy436@gmail.com"},
+        {title:"2BHK near CDA", rent:"₹10,000/month", desc:"Near schools and market. Contact: sanjayyyyy436@gmail.com"}
+      ]
+    },
+    "berhampur": {
+      listings:[
+        {title:"2BHK in Gopalpur Road", rent:"₹6,000/month", desc:"Affordable, easy commute. Contact: sanjayyyyy436@gmail.com"},
+        {title:"3BHK near Berhampur University", rent:"₹11,000/month", desc:"Good for families. Contact: sanjayyyyy436@gmail.com"}
+      ]
+    },
+    "puri": {
+      listings:[
+        {title:"1BHK near Beach Road", rent:"₹6,500/month", desc:"Tourist area — season rates vary. Contact: sanjayyyyy436@gmail.com"},
+        {title:"2BHK near Jagannath Temple", rent:"₹10,500/month", desc:"Good location for shopkeepers. Contact: sanjayyyyy436@gmail.com"}
+      ]
+    },
+    "rourkela": {
+      listings:[
+        {title:"2BHK in Sector-9", rent:"₹7,000/month", desc:"Near industry zone. Contact: sanjayyyyy436@gmail.com"},
+        {title:"3BHK near RIT", rent:"₹13,000/month", desc:"Larger family home. Contact: sanjayyyyy436@gmail.com"}
+      ]
+    },
+    // fallback generic for other cities
+    "default": {
+      listings:[
+        {title:"2BHK standard", rent:"₹7,500/month", desc:"Typical 2BHK in city area. Contact: sanjayyyyy436@gmail.com"},
+        {title:"3BHK family", rent:"₹12,000/month", desc:"3BHK family home. Contact: sanjayyyyy436@gmail.com"}
+      ]
+    }
   };
 
   const services = {
-    cleaning: "We offer cleaning services: standard home cleaning, deep cleaning, and move-out cleaning. Contact: sanjayyyyy436@gmail.com",
-    plumber: "Local plumbers available for leak repair, pipe work, and fittings. Contact: sanjayyyyy436@gmail.com",
-    electrician: "Electricians for wiring, fittings, and small repairs. Contact: sanjayyyyy436@gmail.com",
-    painter: "Painters for interior/exterior painting and touch-ups. Contact: sanjayyyyy436@gmail.com",
-    "list property": "To list your property, please provide: city, type (1BHK/2BHK/3BHK), monthly rent, phone. Or email: sanjayyyyy436@gmail.com"
+    cleaning: "Standard and deep cleaning available. To book, click Book and provide name, phone, city, preferred date/time. Contact: sanjayyyyy436@gmail.com",
+    plumber: "Local plumbers for leak repair, pipe work, and fittings. To book, click Book and provide name, phone, city, preferred time. Contact: sanjayyyyy436@gmail.com",
+    electrician: "Electricians for wiring, fittings & small repairs. To book, click Book and provide name, phone, city, preferred time. Contact: sanjayyyyy436@gmail.com",
+    painter: "Interior/exterior painters available. To book, click Book and provide details. Contact: sanjayyyyy436@gmail.com",
+    "list property": "To list your property, provide: city, type (1BHK/2BHK/3BHK), monthly rent, phone, and photos link (optional). Or email: sanjayyyyy436@gmail.com"
   };
 
-  // UI elements
+  // UI references
   const toggleBtn = document.getElementById('chatbot-toggle');
   const container = document.getElementById('chatbot-container');
   const sendBtn = document.getElementById('send-btn');
@@ -121,7 +150,6 @@
   sendBtn.addEventListener('click', onSend);
   userInput.addEventListener('keypress', e => { if (e.key === 'Enter') onSend(); });
 
-  // Quick service buttons
   document.querySelectorAll('.svc-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const s = btn.dataset.svc;
@@ -130,11 +158,22 @@
     });
   });
 
+  // append message functions
   function appendMessage(kind, text){
     const d = document.createElement('div');
     d.className = 'message ' + (kind === 'bot' ? 'bot' : 'user');
     d.textContent = text;
     body.appendChild(d);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function appendListing(listObj){
+    const wrap = document.createElement('div');
+    wrap.className = 'message bot listing';
+    wrap.innerHTML = `<div class="title">${escapeHtml(listObj.title)}</div>
+                      <div><small>${escapeHtml(listObj.rent)} — ${escapeHtml(listObj.desc)}</small></div>
+                      <div style="margin-top:6px"><button class="action-btn" onclick='doBook("${escapeJs(listObj.title)}","${escapeJs(listObj.rent)}")'>Book</button></div>`;
+    body.appendChild(wrap);
     body.scrollTop = body.scrollHeight;
   }
 
@@ -152,6 +191,7 @@
     }
   }
 
+  // send handler
   function onSend(){
     const txt = userInput.value.trim();
     if (!txt) return;
@@ -160,118 +200,159 @@
     handleUserText(txt);
   }
 
-  // Main logic (text-only "smart" replies)
+  // main intent handler
   function handleUserText(raw){
-    const text = raw.toLowerCase();
+    const text = raw.toLowerCase().trim();
 
-    // Service intent
-    for (const svc of Object.keys(services)){
-      if (text.includes(svc) || text === svc) {
-        simulateReply(services[svc]);
+    // service intents
+    for (const s of Object.keys(services)){
+      if (text.includes(s) || text === s) {
+        simulateReply(services[s]);
         return;
       }
     }
 
-    // Listing intent
-    if (text.includes('list') || text.includes('listing') || text.includes('owner')) {
+    // list property / owner
+    if (text.includes('list') || text.includes('owner') || text.includes('listing')) {
       simulateReply(services["list property"]);
       return;
     }
 
-    // Contact intent
+    // contact
     if (text.includes('contact') || text.includes('email') || text.includes('phone')) {
-      simulateReply("You can reach us at: sanjayyyyy436@gmail.com. We'll reply with details and next steps.");
+      simulateReply("You can reach us at: sanjayyyyy436@gmail.com. We will reply with details and next steps.");
       return;
     }
 
-    // Thank you
+    // thanks
     if (text.includes('thank')) {
-      simulateReply("You're welcome! 😊 If you need anything else, tell me your city or choose a service. Contact: sanjayyyyy436@gmail.com");
+      simulateReply("You're welcome! 😊 Contact: sanjayyyyy436@gmail.com if you need help.");
       return;
     }
 
-    // Find house by city and optional budget
-    // Check for a known city
-    for (const c of Object.keys(cities)){
-      if (text.includes(c)) {
-        // extract budget if present (numbers)
-        const budgetMatch = text.match(/(\d{3,6})/g); // numbers like 8000, 12000
-        const cityInfo = cities[c];
-        if (budgetMatch && budgetMatch.length > 0) {
-          const b = parseInt(budgetMatch[0].replace(/[^0-9]/g,''),10);
-          // respond based on budget
-          let typeText = "";
-          if (b < 6000) typeText = "You will find small 1BHK or shared rooms in this budget.";
-          else if (b < 10000) typeText = `You can get decent 1BHK / 2BHK in ${capitalize(c)} around this price.`;
-          else if (b < 15000) typeText = `Good 2BHK / small 3BHK options available in ${capitalize(c)}.`;
-          else typeText = `You can look for larger 3BHK / family houses in ${capitalize(c)}.`;
-          simulateReply(`${capitalize(c)} example guidance: ${typeText} Typical ranges: Small ${cityInfo.small}, Medium ${cityInfo.medium}, Large ${cityInfo.large}. For owner contact or photos, please email: sanjayyyyy436@gmail.com`);
-        } else {
-          // no budget — give ranges
-          simulateReply(`${capitalize(c)} typical rent (approx): Small ${cityInfo.small}, Medium ${cityInfo.medium}, Large ${cityInfo.large}. Note: ${cityInfo.note}. For listings and owner contact, email sanjayyyyy436@gmail.com`);
-        }
-        return;
+    // find house by city + optional budget
+    // check for city names
+    const cityFound = findCityInText(text);
+    if (cityFound) {
+      const cityKey = cityFound;
+      // extract budget numbers if present
+      const budgetMatch = text.match(/(\d{3,6})/g);
+      const listings = (cities[cityKey] || cities['default']).listings;
+      if (budgetMatch && budgetMatch.length>0) {
+        const b = parseInt(budgetMatch[0].replace(/\D/g,''),10);
+        // pick best sample listing by budget
+        const chosen = pickListingByBudget(listings, b);
+        setTyping(true);
+        setTimeout(() => {
+          setTyping(false);
+          appendListing(chosen);
+        }, 800 + Math.random()*600);
+      } else {
+        // show two sample listings for the city
+        setTyping(true);
+        setTimeout(() => {
+          setTyping(false);
+          appendListing(listings[0]);
+          appendListing(listings[1] || cities['default'].listings[0]);
+        }, 700 + Math.random()*700);
       }
+      return;
     }
 
-    // If user gives only budget (e.g., "8000") — respond asking city
+    // if user only provided budget number
     const onlyBudget = text.match(/^(\d{3,6})$/);
     if (onlyBudget) {
-      simulateReply(`You provided a budget of ₹${onlyBudget[0]}. Please tell me which Odisha city (e.g., Bhubaneswar, Cuttack, Berhampur) so I can suggest matches.`);
+      simulateReply(`You gave a budget of ₹${onlyBudget[0]}. Please tell me which Odisha city (e.g., Bhubaneswar, Cuttack, Berhampur) to show sample houses.`);
       return;
     }
 
-    // If user asks about services in a city like "cleaning in Cuttack"
+    // If user asks "book" with listing mention
+    if (text.startsWith('book') || text.includes('i want to book') || text.includes('booking')) {
+      simulateReply("To book a service or house, please provide: Name, Phone, City, and preferred date/time. I'll create a booking summary you can copy and email to: sanjayyyyy436@gmail.com");
+      return;
+    }
+
+    // fallback
+    simulateReply("I can show sample houses across Odisha or help book services (cleaning, plumber, electrician, painter). Try: 'Find house in Bhubaneswar 8000' or 'Book plumber in Cuttack'. For listings/contact: sanjayyyyy436@gmail.com");
+  }
+
+  // Helpers
+  function findCityInText(text){
     for (const c of Object.keys(cities)){
-      if (text.includes(c)){
-        for (const svc of Object.keys(services)){
-          if (text.includes(svc)) {
-            simulateReply(`${capitalize(svc)} near ${capitalize(c)}: ${services[svc]}. To book, please provide name, phone, city and preferred time, or email sanjayyyyy436@gmail.com`);
-            return;
-          }
-        }
+      if (text.includes(c)) return c;
+    }
+    // check common city words mapping (allow capitalized input)
+    const keys = Object.keys(cities);
+    for (const k of keys){
+      const cap = capitalize(k);
+      if (text.includes(cap.toLowerCase())) return k;
+    }
+    return null;
+  }
+
+  function pickListingByBudget(listings, b){
+    // simple rule: smaller rent if b <= 8000 else next etc.
+    for (const l of listings){
+      const numMatch = l.rent.match(/(\d{3,6})/);
+      if (numMatch){
+        const r = parseInt(numMatch[0].replace(/\D/g,''),10);
+        if (b >= r) return l;
       }
     }
-
-    // Fallback help guidance
-    simulateReply("I can help you find houses across Odisha or book services (cleaning, plumber, electrician, painter). Try: 'Find house in Berhampur 8000' or 'Book plumber in Bhubaneswar'. For listings and contact: sanjayyyyy436@gmail.com");
+    // fallback
+    return listings[0] || cities['default'].listings[0];
   }
 
-  // simulate typing delay then append bot reply
-  function simulateReply(replyText){
+  function simulateReply(text){
     setTyping(true);
-    setTimeout(() => {
-      setTyping(false);
-      appendMessage('bot', replyText);
-    }, 700 + Math.random()*800); // 700–1500ms delay
+    setTimeout(()=>{ setTyping(false); appendMessage('bot', text); }, 600 + Math.random()*800);
   }
 
-  function setTyping(on){
-    if (on){
-      const t = document.createElement('div');
-      t.id = 'typing-ind';
-      t.className = 'message bot typing';
-      t.textContent = 'AI is typing...';
-      body.appendChild(t);
-      body.scrollTop = body.scrollHeight;
-    } else {
-      const t = document.getElementById('typing-ind');
-      if (t) t.remove();
-    }
+  // booking helper invoked by listing Book button
+  function doBook(title, rent){
+    // open small prompt flow to collect basic info (offline)
+    const name = prompt("Enter your name to create booking summary:");
+    if (!name) { alert("Booking canceled"); return; }
+    const phone = prompt("Enter phone number:");
+    if (!phone) { alert("Booking canceled"); return; }
+    const city = prompt("Enter city:");
+    if (!city) { alert("Booking canceled"); return; }
+    const time = prompt("Preferred date/time (e.g., 2025-11-20 10:00 AM):");
+    if (!time) { alert("Booking canceled"); return; }
+
+    // build summary
+    const summary = `Booking request:\nName: ${name}\nPhone: ${phone}\nCity: ${city}\nListing: ${title}\nRent: ${rent}\nPreferred: ${time}\nPlease email this to: sanjayyyyy436@gmail.com`;
+    appendMessage('bot', "Booking summary created. Copy and email it to: sanjayyyyy436@gmail.com");
+    // also show summary in chat as copyable block
+    const block = document.createElement('div');
+    block.className = 'message bot listing';
+    block.innerHTML = `<div style="white-space:pre-wrap;font-family:monospace">${escapeHtml(summary)}</div>
+                       <div style="margin-top:6px"><button class="action-btn" onclick="copyText(${JSON.stringify(summary)})">Copy summary</button></div>`;
+    body.appendChild(block);
+    body.scrollTop = body.scrollHeight;
   }
+
+  // copy helper
+  function copyText(txt){
+    navigator.clipboard?.writeText(txt).then(()=> alert('Summary copied to clipboard. Paste into an email to: sanjayyyyy436@gmail.com'));
+  }
+
+  // small escape helpers to safely place text
+  function escapeHtml(s){ return s.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+  function escapeJs(s){ return s.replace(/"/g,'&quot;').replace(/'/g,"&#39;"); }
 
   function capitalize(s){
-    if (!s) return s;
-    return s.replace(/\b\w/g, ch => ch.toUpperCase());
+    if(!s) return s;
+    return s.replace(/\b\w/g,ch => ch.toUpperCase());
   }
-
-  // initial welcome when opened
-  // ensure welcome only once (when container opens)
+📞 Phone: <a href="tel:7847835758">7847835758</a>  
+💬 WhatsApp: <a href="https://wa.me/917847835758" target="_blank">Chat on WhatsApp</a>
+  // initial welcome handling (only once when opened)
   let welcomed = false;
   toggleBtn.addEventListener('click', () => {
     if (!welcomed && container.style.display === 'flex') {
       welcomed = true;
-      // already have initial text in markup; no extra action
+      // initial text already present
     }
   });
 
