@@ -1,361 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>AI Houses for Rent</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🏠 AI Houses for Rent</title>
   <style>
-    body{font-family:Arial,Helvetica,sans-serif;margin:0;background:#f7f9fc;color:#222}
-    header{background:#0078d7;color:#fff;padding:1.2rem;text-align:center;font-size:1.5rem;font-weight:700}
-    main{padding:1.5rem;max-width:900px;margin:auto}
-    section{margin-bottom:2rem;background:#fff;padding:1rem 1.5rem;border-radius:12px;box-shadow:0 2px 5px rgba(0,0,0,.08)}
-    footer{text-align:center;padding:1rem;color:#666;font-size:.9rem}
-
-/* Chat UI */
-    #chatbot-toggle{position:fixed;bottom:20px;right:20px;background:#0078d7;color:#fff;border:none;border-radius:50%;width:60px;height:60px;font-size:24px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.15);z-index:1000}
-    #chatbot-container{display:none;position:fixed;bottom:90px;right:20px;width:380px;height:540px;background:#fff;border-radius:12px;box-shadow:0 6px 22px rgba(0,0,0,.22);display:flex;flex-direction:column;overflow:hidden;z-index:1000}
-    #chatbot-header{background:#0078d7;color:#fff;padding:.9rem;font-weight:700;text-align:center}
-    #chatbot-body{flex:1;padding:.8rem;overflow-y:auto}
-    .message{margin-bottom:.8rem;max-width:92%;word-wrap:break-word}
-    .bot{background:#e6f0ff;padding:.6rem .9rem;border-radius:12px}
-    .user{background:#d1ffd6;padding:.6rem .9rem;border-radius:12px;margin-left:auto}
-    .listing{background:#fff;border:1px solid #e1e7ff;padding:.6rem;border-radius:10px;margin-top:6px}
-    .listing .title{font-weight:700}
-    .listing small{color:#555}
-    #chatbot-input{display:flex;border-top:1px solid #e6e6e6;padding:.6rem}
-    #chatbot-input input{flex:1;border:1px solid #ddd;border-radius:8px;padding:.6rem;font-size:1rem}
-    #chatbot-input button{margin-left:.5rem;padding:.5rem 1rem;border:none;border-radius:8px;background:#0078d7;color:#fff;cursor:pointer}
-    .quick-services{display:flex;gap:.5rem;flex-wrap:wrap;margin:8px 0}
-    .svc-btn{background:#f0f7ff;border:1px solid #d6eaff;padding:.4rem .6rem;border-radius:8px;cursor:pointer}
-    .action-btn{background:#0078d7;color:white;border:none;padding:.35rem .6rem;border-radius:6px;cursor:pointer;margin-left:6px}
-    .typing{font-style:italic;color:#666}
-    @media (max-width:420px){
-      #chatbot-container{right:12px;left:12px;width:auto;height:540px}
-      #chatbot-toggle{right:12px}
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f7f8fa;
+    }
+    header {
+      background: #007bff;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.5rem;
+    }
+    .chat-container {
+      width: 90%;
+      max-width: 500px;
+      background: white;
+      margin: 2rem auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 1rem;
+    }
+    .chat-header {
+      background: #0056b3;
+      color: white;
+      padding: 0.8rem;
+      border-radius: 10px 10px 0 0;
+      text-align: center;
+      font-weight: bold;
+    }
+    .chat-message {
+      background: #e9f1ff;
+      margin: 0.5rem 0;
+      padding: 0.6rem;
+      border-radius: 8px;
+    }
+    .user-message {
+      background: #d1ffd7;
+      text-align: right;
+    }
+    .input-area {
+      display: flex;
+      margin-top: 1rem;
+    }
+    input {
+      flex: 1;
+      padding: 0.6rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 0.6rem 1rem;
+      margin-left: 0.5rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+      background: #f1f1f1;
+    }
+    .service-buttons button {
+      margin: 0.2rem;
+      background: #e0e0e0;
+      color: #000;
     }
   </style>
 </head>
 <body>
   <header>🏠 AI Houses for Rent</header>
 
-  <main>
-    <section>
-      <h2>Welcome to AI Houses for Rent</h2>
-      <p>Find and rent your perfect home in Odisha with the power of AI.</p>
-    </section>
-
-    <section>
-      <h2>Why Choose Us?</h2>
-      <ul>
-        <li>Smart AI-style house guidance</li>
-        <li>Local Odisha city knowledge</li>
-        <li>Free account setup for owners</li>
-        <li>24×7 chatbot support</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Contact Us</h2>
-      <p>Email: <a href="mailto:sanjayyyyy436@gmail.com">sanjayyyyy436@gmail.com</a></p>
-      <p>Location: Odisha, India</p>
-    </section>
-  </main>
-
-  <footer>© 2025 AI Houses for Rent — Made with ❤️ in Odisha</footer>
-
-  <!-- Chat widget -->
-  <button id="chatbot-toggle" title="Open chat">💬</button>
-
-  <div id="chatbot-container" role="dialog" aria-label="Chatbot">
-    <div id="chatbot-header">AI Assistant — Houses & Services</div>
-    <div id="chatbot-body" aria-live="polite">
-      <div class="message bot">Hello 👋! I can show sample houses across Odisha and help with services (cleaning, plumber, electrician, painter). Try: "Find house in Bhubaneswar 8000" or click a service button.</div>
-      <div class="quick-services" style="margin-top:8px">
-        <button class="svc-btn" data-svc="cleaning">Cleaning</button>
-        <button class="svc-btn" data-svc="plumber">Plumber</button>
-        <button class="svc-btn" data-svc="electrician">Electrician</button>
-        <button class="svc-btn" data-svc="painter">Painter</button>
-        <button class="svc-btn" data-svc="list property">List Property</button>
-      </div>
+  <div class="chat-container">
+    <div class="chat-header">AI Assistant — Houses & Services</div>
+    <div id="chat-box" class="chat-box">
+      <div class="chat-message">Hello 👋! I can help you find houses, list a property, or book services like cleaning, plumber, electrician, and painter anywhere in Odisha.<br><br>Try: "Find house in Berhampur 8000".</div>
     </div>
 
-    <div id="chatbot-input">
-      <input id="user-input" placeholder="Type message or choose a service..." aria-label="Chat input" />
-      <button id="send-btn">Send</button>
+    <div class="service-buttons">
+      <button onclick="showService('Cleaning')">Cleaning</button>
+      <button onclick="showService('Plumber')">Plumber</button>
+      <button onclick="showService('Electrician')">Electrician</button>
+      <button onclick="showService('Painter')">Painter</button>
+      <button onclick="showService('List Property')">List Property</button>
+    </div>
+
+    <div class="input-area">
+      <input type="text" id="userInput" placeholder="Type message or choose a service.." />
+      <button onclick="sendMessage()">Send</button>
     </div>
   </div>
 
-<script>
-  // Sample city data & sample listings
-  const cities = {
-    "bhubaneswar": {
-      listings:[
-        {title:"2BHK near Jaydev Vihar", rent:"₹8,000/month", desc:"Well-ventilated, 2 bathrooms, near market. Contact: sanjayyyyy436@gmail.com"},
-        {title:"3BHK in Khandagiri", rent:"₹14,000/month", desc:"Family-friendly, parking available. Contact: sanjayyyyy436@gmail.com"}
-      ]
-    },
-    "cuttack": {
-      listings:[
-        {title:"1BHK near Link Road", rent:"₹6,000/month", desc:"Compact 1BHK, good for singles. Contact: sanjayyyyy436@gmail.com"},
-        {title:"2BHK near CDA", rent:"₹10,000/month", desc:"Near schools and market. Contact: sanjayyyyy436@gmail.com"}
-      ]
-    },
-    "berhampur": {
-      listings:[
-        {title:"2BHK in Gopalpur Road", rent:"₹6,000/month", desc:"Affordable, easy commute. Contact: sanjayyyyy436@gmail.com"},
-        {title:"3BHK near Berhampur University", rent:"₹11,000/month", desc:"Good for families. Contact: sanjayyyyy436@gmail.com"}
-      ]
-    },
-    "puri": {
-      listings:[
-        {title:"1BHK near Beach Road", rent:"₹6,500/month", desc:"Tourist area — season rates vary. Contact: sanjayyyyy436@gmail.com"},
-        {title:"2BHK near Jagannath Temple", rent:"₹10,500/month", desc:"Good location for shopkeepers. Contact: sanjayyyyy436@gmail.com"}
-      ]
-    },
-    "rourkela": {
-      listings:[
-        {title:"2BHK in Sector-9", rent:"₹7,000/month", desc:"Near industry zone. Contact: sanjayyyyy436@gmail.com"},
-        {title:"3BHK near RIT", rent:"₹13,000/month", desc:"Larger family home. Contact: sanjayyyyy436@gmail.com"}
-      ]
-    },
-    // fallback generic for other cities
-    "default": {
-      listings:[
-        {title:"2BHK standard", rent:"₹7,500/month", desc:"Typical 2BHK in city area. Contact: sanjayyyyy436@gmail.com"},
-        {title:"3BHK family", rent:"₹12,000/month", desc:"3BHK family home. Contact: sanjayyyyy436@gmail.com"}
-      ]
-    }
-  };
+  <footer>
+    <p>📧 Email: <a href="mailto:sanjayyyyy436@gmail.com">sanjayyyyy436@gmail.com</a></p>
+    <p>📞 Contact: <a href="tel:7847835758">7847835758</a> | <a href="https://wa.me/917847835758" target="_blank">WhatsApp</a></p>
+    <p>Location: Odisha, India</p>
+    <p>© 2025 AI Houses for Rent — Made with ❤️ in Odisha</p>
+  </footer>
 
-  const services = {
-    cleaning: "Standard and deep cleaning available. To book, click Book and provide name, phone, city, preferred date/time. Contact: sanjayyyyy436@gmail.com",
-    plumber: "Local plumbers for leak repair, pipe work, and fittings. To book, click Book and provide name, phone, city, preferred time. Contact: sanjayyyyy436@gmail.com",
-    electrician: "Electricians for wiring, fittings & small repairs. To book, click Book and provide name, phone, city, preferred time. Contact: sanjayyyyy436@gmail.com",
-    painter: "Interior/exterior painters available. To book, click Book and provide details. Contact: sanjayyyyy436@gmail.com",
-    "list property": "To list your property, provide: city, type (1BHK/2BHK/3BHK), monthly rent, phone, and photos link (optional). Or email: sanjayyyyy436@gmail.com"
-  };
-
-  // UI references
-  const toggleBtn = document.getElementById('chatbot-toggle');
-  const container = document.getElementById('chatbot-container');
-  const sendBtn = document.getElementById('send-btn');
-  const userInput = document.getElementById('user-input');
-  const body = document.getElementById('chatbot-body');
-
-  toggleBtn.addEventListener('click', () => {
-    container.style.display = container.style.display === 'flex' ? 'none' : 'flex';
-    if (container.style.display === 'flex') userInput.focus();
-  });
-
-  sendBtn.addEventListener('click', onSend);
-  userInput.addEventListener('keypress', e => { if (e.key === 'Enter') onSend(); });
-
-  document.querySelectorAll('.svc-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const s = btn.dataset.svc;
-      appendMessage('user', capitalize(s));
-      handleUserText(s);
-    });
-  });
-
-  // append message functions
-  function appendMessage(kind, text){
-    const d = document.createElement('div');
-    d.className = 'message ' + (kind === 'bot' ? 'bot' : 'user');
-    d.textContent = text;
-    body.appendChild(d);
-    body.scrollTop = body.scrollHeight;
-  }
-
-  function appendListing(listObj){
-    const wrap = document.createElement('div');
-    wrap.className = 'message bot listing';
-    wrap.innerHTML = `<div class="title">${escapeHtml(listObj.title)}</div>
-                      <div><small>${escapeHtml(listObj.rent)} — ${escapeHtml(listObj.desc)}</small></div>
-                      <div style="margin-top:6px"><button class="action-btn" onclick='doBook("${escapeJs(listObj.title)}","${escapeJs(listObj.rent)}")'>Book</button></div>`;
-    body.appendChild(wrap);
-    body.scrollTop = body.scrollHeight;
-  }
-
-  function setTyping(on, text='AI is typing...'){
-    if (on){
-      const t = document.createElement('div');
-      t.id = 'typing-ind';
-      t.className = 'message bot typing';
-      t.textContent = text;
-      body.appendChild(t);
-      body.scrollTop = body.scrollHeight;
-    } else {
-      const t = document.getElementById('typing-ind');
-      if (t) t.remove();
-    }
-  }
-
-  // send handler
-  function onSend(){
-    const txt = userInput.value.trim();
-    if (!txt) return;
-    appendMessage('user', txt);
-    userInput.value = '';
-    handleUserText(txt);
-  }
-
-  // main intent handler
-  function handleUserText(raw){
-    const text = raw.toLowerCase().trim();
-
-    // service intents
-    for (const s of Object.keys(services)){
-      if (text.includes(s) || text === s) {
-        simulateReply(services[s]);
-        return;
+  <script>
+    function showService(service) {
+      const chatBox = document.getElementById('chat-box');
+      let reply = '';
+      if (service === 'Cleaning') {
+        reply = "🧹 We offer cleaning services: standard home cleaning, deep cleaning, and move-out cleaning. Contact: sanjayyyyy436@gmail.com | 📞 7847835758 (Call/WhatsApp)";
+      } else if (service === 'Plumber') {
+        reply = "🔧 Local plumbers available for leak repair, pipe work, and fittings across Odisha. Contact: sanjayyyyy436@gmail.com | 📞 7847835758 (Call/WhatsApp)";
+      } else if (service === 'Electrician') {
+        reply = "💡 Professional electricians for wiring, appliance setup, and repairs in all Odisha districts. Contact: sanjayyyyy436@gmail.com | 📞 7847835758 (Call/WhatsApp)";
+      } else if (service === 'Painter') {
+        reply = "🎨 House painting services available — interior & exterior. Contact: sanjayyyyy436@gmail.com | 📞 7847835758 (Call/WhatsApp)";
+      } else if (service === 'List Property') {
+        reply = "🏘️ Want to list your property on AI Houses for Rent? Send property details to sanjayyyyy436@gmail.com or WhatsApp 📞 7847835758.";
       }
+
+      chatBox.innerHTML += `<div class='chat-message user-message'>${service}</div>`;
+      chatBox.innerHTML += `<div class='chat-message'>${reply}</div>`;
+      chatBox.scrollTop = chatBox.scrollHeight;
     }
 
-    // list property / owner
-    if (text.includes('list') || text.includes('owner') || text.includes('listing')) {
-      simulateReply(services["list property"]);
-      return;
+    function sendMessage() {
+      const input = document.getElementById('userInput');
+      const msg = input.value.trim();
+      if (msg === '') return;
+      const chatBox = document.getElementById('chat-box');
+      chatBox.innerHTML += `<div class='chat-message user-message'>${msg}</div>`;
+      input.value = '';
+
+      setTimeout(() => {
+        chatBox.innerHTML += `<div class='chat-message'>Thanks for your message! Our team will contact you soon at 📧 sanjayyyyy436@gmail.com or 📞 7847835758.</div>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }, 800);
     }
-
-    // contact
-    if (text.includes('contact') || text.includes('email') || text.includes('phone')) {
-      simulateReply("You can reach us at: sanjayyyyy436@gmail.com. We will reply with details and next steps.");
-      return;
-    }
-
-    // thanks
-    if (text.includes('thank')) {
-      simulateReply("You're welcome! 😊 Contact: sanjayyyyy436@gmail.com if you need help.");
-      return;
-    }
-
-    // find house by city + optional budget
-    // check for city names
-    const cityFound = findCityInText(text);
-    if (cityFound) {
-      const cityKey = cityFound;
-      // extract budget numbers if present
-      const budgetMatch = text.match(/(\d{3,6})/g);
-      const listings = (cities[cityKey] || cities['default']).listings;
-      if (budgetMatch && budgetMatch.length>0) {
-        const b = parseInt(budgetMatch[0].replace(/\D/g,''),10);
-        // pick best sample listing by budget
-        const chosen = pickListingByBudget(listings, b);
-        setTyping(true);
-        setTimeout(() => {
-          setTyping(false);
-          appendListing(chosen);
-        }, 800 + Math.random()*600);
-      } else {
-        // show two sample listings for the city
-        setTyping(true);
-        setTimeout(() => {
-          setTyping(false);
-          appendListing(listings[0]);
-          appendListing(listings[1] || cities['default'].listings[0]);
-        }, 700 + Math.random()*700);
-      }
-      return;
-    }
-
-    // if user only provided budget number
-    const onlyBudget = text.match(/^(\d{3,6})$/);
-    if (onlyBudget) {
-      simulateReply(`You gave a budget of ₹${onlyBudget[0]}. Please tell me which Odisha city (e.g., Bhubaneswar, Cuttack, Berhampur) to show sample houses.`);
-      return;
-    }
-
-    // If user asks "book" with listing mention
-    if (text.startsWith('book') || text.includes('i want to book') || text.includes('booking')) {
-      simulateReply("To book a service or house, please provide: Name, Phone, City, and preferred date/time. I'll create a booking summary you can copy and email to: sanjayyyyy436@gmail.com");
-      return;
-    }
-
-    // fallback
-    simulateReply("I can show sample houses across Odisha or help book services (cleaning, plumber, electrician, painter). Try: 'Find house in Bhubaneswar 8000' or 'Book plumber in Cuttack'. For listings/contact: sanjayyyyy436@gmail.com");
-  }
-
-  // Helpers
-  function findCityInText(text){
-    for (const c of Object.keys(cities)){
-      if (text.includes(c)) return c;
-    }
-    // check common city words mapping (allow capitalized input)
-    const keys = Object.keys(cities);
-    for (const k of keys){
-      const cap = capitalize(k);
-      if (text.includes(cap.toLowerCase())) return k;
-    }
-    return null;
-  }
-
-  function pickListingByBudget(listings, b){
-    // simple rule: smaller rent if b <= 8000 else next etc.
-    for (const l of listings){
-      const numMatch = l.rent.match(/(\d{3,6})/);
-      if (numMatch){
-        const r = parseInt(numMatch[0].replace(/\D/g,''),10);
-        if (b >= r) return l;
-      }
-    }
-    // fallback
-    return listings[0] || cities['default'].listings[0];
-  }
-
-  function simulateReply(text){
-    setTyping(true);
-    setTimeout(()=>{ setTyping(false); appendMessage('bot', text); }, 600 + Math.random()*800);
-  }
-
-  // booking helper invoked by listing Book button
-  function doBook(title, rent){
-    // open small prompt flow to collect basic info (offline)
-    const name = prompt("Enter your name to create booking summary:");
-    if (!name) { alert("Booking canceled"); return; }
-    const phone = prompt("Enter phone number:");
-    if (!phone) { alert("Booking canceled"); return; }
-    const city = prompt("Enter city:");
-    if (!city) { alert("Booking canceled"); return; }
-    const time = prompt("Preferred date/time (e.g., 2025-11-20 10:00 AM):");
-    if (!time) { alert("Booking canceled"); return; }
-
-    // build summary
-    const summary = `Booking request:\nName: ${name}\nPhone: ${phone}\nCity: ${city}\nListing: ${title}\nRent: ${rent}\nPreferred: ${time}\nPlease email this to: sanjayyyyy436@gmail.com`;
-    appendMessage('bot', "Booking summary created. Copy and email it to: sanjayyyyy436@gmail.com");
-    // also show summary in chat as copyable block
-    const block = document.createElement('div');
-    block.className = 'message bot listing';
-    block.innerHTML = `<div style="white-space:pre-wrap;font-family:monospace">${escapeHtml(summary)}</div>
-                       <div style="margin-top:6px"><button class="action-btn" onclick="copyText(${JSON.stringify(summary)})">Copy summary</button></div>`;
-    body.appendChild(block);
-    body.scrollTop = body.scrollHeight;
-  }
-
-  // copy helper
-  function copyText(txt){
-    navigator.clipboard?.writeText(txt).then(()=> alert('Summary copied to clipboard. Paste into an email to: sanjayyyyy436@gmail.com'));
-  }
-
-  // small escape helpers to safely place text
-  function escapeHtml(s){ return s.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
-  function escapeJs(s){ return s.replace(/"/g,'&quot;').replace(/'/g,"&#39;"); }
-
-  function capitalize(s){
-    if(!s) return s;
-    return s.replace(/\b\w/g,ch => ch.toUpperCase());
-  }
-📞 Phone: <a href="tel:7847835758">7847835758</a>  
-💬 WhatsApp: <a href="https://wa.me/917847835758" target="_blank">Chat on WhatsApp</a>
-  // initial welcome handling (only once when opened)
-  let welcomed = false;
-  toggleBtn.addEventListener('click', () => {
-    if (!welcomed && container.style.display === 'flex') {
-      welcomed = true;
-      // initial text already present
-    }
-  });
-
-</script>
+  </script>
 </body>
 </html>
